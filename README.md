@@ -1,24 +1,11 @@
-# README
+# 為替レートAPI
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 初期設定
 
-Things you may want to cover:
+最初に以下のコマンドを実行してください。
 
-* Ruby version
+```
+$ make init
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+その後、http://localhost:53000/ にアクセスして、画面が表示されれば成功です。

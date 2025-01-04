@@ -1,0 +1,48 @@
+services:
+  db:
+    image: postgres:17.2
+    container_name: exchange-rate-api-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      TZ: Asia/Tokyo
+    networks:
+      exchange-rate-network:
+        ipv4_address: 172.24.1.2
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.development
+    container_name: exchange-rate-api-app
+    networks:
+      - exchange-rate-network
+    ports:
+      - "53000:3000"
+    environment:
+      RAILS_DATABASE_USER: postgres
+      RAILS_DATABASE_PASSWORD: password
+      RAILS_DATABASE_HOST: db
+      TZ: Asia/Tokyo
+      PORT: 3000
+      BINDING: 0.0.0.0
+    depends_on:
+      - db
+    volumes:
+      - .:/rails
+      - app-bundle:/usr/local/bundle
+    stdin_open: true
+    tty: true
+    command: bundle exec pumactl start
+
+volumes:
+  app-bundle:
+  db-data:
+
+networks:
+  exchange-rate-network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.24.1.0/24
