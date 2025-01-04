@@ -10,8 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 0) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_04_005149) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
+  create_table "exchange_rate_records", force: :cascade do |t|
+    t.string "base_currency", default: "USD", null: false, comment: "基準通貨"
+    t.string "target_currency", default: "JPY", null: false, comment: "対象通貨"
+    t.decimal "rate", precision: 10, scale: 4
+    t.datetime "recorded_at", null: false, comment: "記録日時"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 end
