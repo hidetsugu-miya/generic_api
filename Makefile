@@ -38,6 +38,12 @@ db.reset: db.up
 	docker compose run --rm app bundle exec rails db:drop db:create db:migrate
 	docker compose run --rm -e RAILS_ENV=test app bundle exec rails db:migrate
 
+rspec.prepare: db.up bundle
+	docker compose run --rm -e RAILS_ENV=test app bundle exec rails db:drop db:create db:migrate
+
+rspec: rspec.prepare
+	docker compose run --rm app bundle exec rspec
+
 rubocop:
 	docker compose run --rm app bundle exec rubocop
 
