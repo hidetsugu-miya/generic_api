@@ -15,9 +15,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_04_005149) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "exchange_rate_records", force: :cascade do |t|
-    t.string "base_currency", default: "USD", null: false, comment: "基準通貨"
-    t.string "target_currency", default: "JPY", null: false, comment: "対象通貨"
-    t.decimal "rate", precision: 10, scale: 4
+    t.string "base_currency", default: "usd", null: false, comment: "基準通貨"
+    t.string "target_currency", default: "jpy", null: false, comment: "対象通貨"
+    t.decimal "rate", precision: 10, scale: 4, null: false
     t.datetime "recorded_at", null: false, comment: "記録日時"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

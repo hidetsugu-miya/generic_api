@@ -35,6 +35,26 @@ services:
     stdin_open: true
     tty: true
     command: bundle exec pumactl start
+  job:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.development
+    container_name: exchange-rate-api-job
+    networks:
+      - exchange-rate-network
+    environment:
+      RAILS_DATABASE_USER: postgres
+      RAILS_DATABASE_PASSWORD: password
+      RAILS_DATABASE_HOST: db
+      TZ: Asia/Tokyo
+    depends_on:
+      - db
+    volumes:
+      - .:/rails
+      - app-bundle:/usr/local/bundle
+    stdin_open: true
+    tty: true
+    command: bin/jobs
 
 volumes:
   app-bundle:
