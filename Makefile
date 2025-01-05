@@ -49,3 +49,6 @@ rubocop:
 
 bash:
 	docker compose run --rm app /bin/bash
+
+annotate_models: db.migrate
+	docker compose run --rm app bundle exec annotaterb models -f markdown --sort
