@@ -21,6 +21,7 @@
 ![Rails](https://img.shields.io/badge/Rails-8.0.1-CC0000.svg?logo=rails&style=flat)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17.2-336791.svg?logo=postgresql&style=flat)
 ![Docker](https://img.shields.io/badge/Docker-latest-2496ED.svg?logo=docker&style=flat)
+
 # 開発環境
 
 ## 初期設定
@@ -67,8 +68,59 @@ make rubocop
 make annotate_models
 ```
 
+# API設計
+
+基本的な方針はRestful API に基づくものとします。
+
+## HTTP メソッドに関する操作の定義
+
+アルバム（album）を例にサンプルを提示します。
+
+| TH | TH | TH | TH |TH |
+| ---- | ---- | ---- | ---- | ---- |
+|リソース|POST|GET|PUT|DELETE|
+|/albums|新しいアルバムの作成|全てのアルバムを取得|アルバムを一括更新|全てのアルバムを削除|
+|/albums/:album_id|Error|アルバムを一つ取得|アルバムの詳細を更新|アルバムの詳細を削除|
+
+## レスポンス設計
+
+### 期待する結果が単数形である場合
+
+```json
+{
+  "id": 1
+}
+```
+
+### 期待する結果が複数形である場合
+
+ページネーションとして利用できることを想定して、total、limit、offsetの情報を持つものとします。
+
+```json
+{
+  "total": 1,
+  "items": [
+    {
+      "id": 1
+    }
+  ]
+}
+```
+
+## エンドポイント設計
+
+{verb} /{feature_name}/{version}/{resource_name}
+
+* verb
+    * GETやPOSTなど、メソッドを指定します。
+* feature_name
+    * 機能名を指します。特定の企業に公開する場合は、企業名を含めることがあります。
+    * 自社内で利用するものは feature_nameをprivate とします。
+* version
+    * v1やv2などバージョンを指定します。
+* resource_name
+    * リソース名を指定します。
+
 # 今後の開発予定
 
-* [ ] 保存された為替レートを取得するAPIの作成
 * [ ] nextjsを使用したフロントエンドの作成（別プロジェクト予定）
-* [ ] エンドポイント設計基準の作成
