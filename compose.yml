@@ -1,13 +1,13 @@
 services:
   db:
     image: postgres:17.2
-    container_name: exchange-rate-api-db
+    container_name: generic-api-db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       TZ: Asia/Tokyo
     networks:
-      exchange-rate-network:
+      generic-network:
         ipv4_address: 172.24.1.2
     volumes:
       - db-data:/var/lib/postgresql/data
@@ -15,9 +15,9 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.development
-    container_name: exchange-rate-api-app
+    container_name: generic-api-app
     networks:
-      - exchange-rate-network
+      - generic-network
     ports:
       - "53000:3000"
     environment:
@@ -39,9 +39,9 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.development
-    container_name: exchange-rate-api-job
+    container_name: generic-api-job
     networks:
-      - exchange-rate-network
+      - generic-network
     environment:
       RAILS_DATABASE_USER: postgres
       RAILS_DATABASE_PASSWORD: password
@@ -61,7 +61,7 @@ volumes:
   db-data:
 
 networks:
-  exchange-rate-network:
+  generic-network:
     ipam:
       driver: default
       config:

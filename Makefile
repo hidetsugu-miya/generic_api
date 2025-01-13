@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := usage
-NETWORK_NAME = exchange-rate-network
+NETWORK_NAME = generic-network
 
 init: network.create build bundle db.migrate
 

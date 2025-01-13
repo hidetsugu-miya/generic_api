@@ -2,8 +2,8 @@
 # check=error=true
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-# docker build -t exchange_rate_api .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name exchange_rate_api exchange_rate_api
+# docker build -t generic_api .
+# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name generic_api generic_api
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 

@@ -2,11 +2,11 @@
 
 ## プロジェクト名
 
-為替レートAPI
+汎用API
 
 ## プロジェクトの概要
 
-為替レートを保存し、取得するAPIです。
+個人的な勉強のためにいろんな汎用APIを作成しています。
 
 ## プロジェクトの目的
 
@@ -88,7 +88,9 @@ make annotate_models
 
 ```json
 {
-  "id": 1
+  "album": { 
+    "id": 1
+  }
 }
 ```
 
@@ -99,7 +101,7 @@ make annotate_models
 ```json
 {
   "total": 1,
-  "items": [
+  "albums": [
     {
       "id": 1
     }
